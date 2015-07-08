@@ -10,7 +10,7 @@ import UIKit
 
 class MasterViewController: UITableViewController {
 
-    var objects = [AnyObject]()
+    var Fortunes = [Fortune]();
 
 
     override func awakeFromNib() {
@@ -19,11 +19,7 @@ class MasterViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
-
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
-        self.navigationItem.rightBarButtonItem = addButton
+        update();
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,18 +27,12 @@ class MasterViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func insertNewObject(sender: AnyObject) {
-        objects.insert(NSDate(), atIndex: 0)
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-    }
-
     // MARK: - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
-                let object = objects[indexPath.row] as! NSDate
+                let object = Fortunes[indexPath.row]
             (segue.destinationViewController as! DetailViewController).detailItem = object
             }
         }
@@ -55,14 +45,14 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return Fortunes.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
 
-        let object = objects[indexPath.row] as! NSDate
-        cell.textLabel!.text = object.description
+        let object = Fortunes[indexPath.row]
+        cell.textLabel!.text = object.title()
         return cell
     }
 
@@ -73,13 +63,33 @@ class MasterViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            objects.removeAtIndex(indexPath.row)
+            Fortunes.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
     }
 
+    // MARK: - App funcs
 
+    func update() {
+        var urlstring = NSString(format: "http://elfga.com/adage/raw/") as String;
+        var data = NSData(contentsOfURL: NSURL(string: urlstring)!);
+        var datastr = NSString(data: data!, encoding:NSUTF8StringEncoding) as! String;
+
+        var json = NSJSONSerialization.JSONObjectWithData(data!,options:nil,error:nil) as? NSArray;
+        var items = json! as NSArray;
+        Fortunes.removeAll(keepCapacity: true);
+        for entry in items {
+            var id = entry["id"] as? Int;
+            var db = entry["db"] as? String;
+            var shortbody = entry["body"] as? String;
+
+            Fortunes.append(Fortune(db:db!,id:id!,shortbody:shortbody!));
+            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        }
+    }
+    
 }
 
