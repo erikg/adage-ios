@@ -34,6 +34,12 @@ class MasterViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.refreshControl = UIRefreshControl();
+        if(self.refreshControl != nil ) {
+            self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh");
+            self.refreshControl!.addTarget(self, action: "update:", forControlEvents: UIControlEvents.ValueChanged);
+            self.tableView.addSubview(refreshControl!);
+        }
         update();
     }
 
@@ -91,7 +97,8 @@ class MasterViewController: UITableViewController {
         var urlstring = NSString(format: "http://elfga.com/adage/raw/") as String;
         if let data = NSData(contentsOfURL: NSURL(string: urlstring)!) {
             if let json = NSJSONSerialization.JSONObjectWithData(data,options:nil,error:nil) as? NSArray {
-                Fortunes.removeAll(keepCapacity: true);
+                Fortunes.removeAll();
+                self.tableView.reloadData();
                 for entry in json {
                     var id = entry["id"] as? Int;
                     var db = entry["db"] as? String;
@@ -103,7 +110,12 @@ class MasterViewController: UITableViewController {
                 }
             }
         }
+        self.tableView.reloadData();
     }
-    
+
+    func update(sender: AnyObject) {
+        update();
+        self.refreshControl?.endRefreshing();
+    }
 }
 
