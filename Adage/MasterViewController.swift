@@ -89,20 +89,19 @@ class MasterViewController: UITableViewController {
 
     func update() {
         var urlstring = NSString(format: "http://elfga.com/adage/raw/") as String;
-        var data = NSData(contentsOfURL: NSURL(string: urlstring)!);
-        var datastr = NSString(data: data!, encoding:NSUTF8StringEncoding) as! String;
+        if let data = NSData(contentsOfURL: NSURL(string: urlstring)!) {
+            if let json = NSJSONSerialization.JSONObjectWithData(data,options:nil,error:nil) as? NSArray {
+                Fortunes.removeAll(keepCapacity: true);
+                for entry in json {
+                    var id = entry["id"] as? Int;
+                    var db = entry["db"] as? String;
+                    var shortbody = entry["body"] as? String;
 
-        var json = NSJSONSerialization.JSONObjectWithData(data!,options:nil,error:nil) as? NSArray;
-        var items = json! as NSArray;
-        Fortunes.removeAll(keepCapacity: true);
-        for entry in items {
-            var id = entry["id"] as? Int;
-            var db = entry["db"] as? String;
-            var shortbody = entry["body"] as? String;
-
-            Fortunes.append(Fortune(db:db!,id:id!,shortbody:shortbody!));
-            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-            self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                    Fortunes.append(Fortune(db:db!,id:id!,shortbody:shortbody!));
+                    let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+                    self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                }
+            }
         }
     }
     

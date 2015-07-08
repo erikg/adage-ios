@@ -19,8 +19,8 @@
 // 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-// import Foundation
 
+import Foundation
 
 public class Fortune {
     var db: String;
@@ -40,11 +40,10 @@ public class Fortune {
             return body;
         }
         var urlstring = NSString(format: "http://elfga.com/adage/raw/%@/%d", db, id) as String;
-        var data = NSData(contentsOfURL: NSURL(string: urlstring)!);
-        var datastr = NSString(data: data!, encoding:NSUTF8StringEncoding) as! String;
-
-        var json = NSJSONSerialization.JSONObjectWithData(data!,options:nil,error:nil) as! NSDictionary;
-        body = json["body"] as? String;
+        if let data = NSData(contentsOfURL: NSURL(string: urlstring)!) {
+            var json = NSJSONSerialization.JSONObjectWithData(data,options:nil,error:nil) as! NSDictionary;
+            body = json["body"] as? String;
+        }
 
         return body;
     }
