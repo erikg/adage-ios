@@ -1,6 +1,6 @@
 //
 //  MasterViewController.swift
-//  ProdCat
+//  Adage
 //
 //  Created by Erik Greenwald on 7/7/15.
 //  Copyright (c) 2015 ElfGA. All rights reserved.

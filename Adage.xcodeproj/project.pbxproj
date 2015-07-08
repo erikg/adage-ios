@@ -13,7 +13,7 @@
 		036B95621B4C4B930071EC91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 036B95601B4C4B930071EC91 /* Main.storyboard */; };
 		036B95641B4C4B930071EC91 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 036B95631B4C4B930071EC91 /* Images.xcassets */; };
 		036B95671B4C4B930071EC91 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 036B95651B4C4B930071EC91 /* LaunchScreen.xib */; };
-		036B95731B4C4B930071EC91 /* ProdCatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036B95721B4C4B930071EC91 /* ProdCatTests.swift */; };
+		036B95731B4C4B930071EC91 /* AdageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036B95721B4C4B930071EC91 /* AdageTests.swift */; };
 		0391E4771B4D6037001D229F /* Fortune.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0391E4761B4D6037001D229F /* Fortune.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,12 +23,12 @@
 			containerPortal = 036B954D1B4C4B930071EC91 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 036B95541B4C4B930071EC91;
-			remoteInfo = ProdCat;
+			remoteInfo = Adage;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		036B95551B4C4B930071EC91 /* ProdCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProdCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		036B95551B4C4B930071EC91 /* Adage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Adage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		036B95591B4C4B930071EC91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		036B955A1B4C4B930071EC91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		036B955C1B4C4B930071EC91 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -36,9 +36,9 @@
 		036B95611B4C4B930071EC91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		036B95631B4C4B930071EC91 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		036B95661B4C4B930071EC91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		036B956C1B4C4B930071EC91 /* ProdCatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProdCatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		036B956C1B4C4B930071EC91 /* AdageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		036B95711B4C4B930071EC91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		036B95721B4C4B930071EC91 /* ProdCatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdCatTests.swift; sourceTree = "<group>"; };
+		036B95721B4C4B930071EC91 /* AdageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdageTests.swift; sourceTree = "<group>"; };
 		0391E4761B4D6037001D229F /* Fortune.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fortune.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,8 +63,8 @@
 		036B954C1B4C4B930071EC91 = {
 			isa = PBXGroup;
 			children = (
-				036B95571B4C4B930071EC91 /* ProdCat */,
-				036B956F1B4C4B930071EC91 /* ProdCatTests */,
+				036B95571B4C4B930071EC91 /* Adage */,
+				036B956F1B4C4B930071EC91 /* AdageTests */,
 				036B95561B4C4B930071EC91 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,13 +72,13 @@
 		036B95561B4C4B930071EC91 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				036B95551B4C4B930071EC91 /* ProdCat.app */,
-				036B956C1B4C4B930071EC91 /* ProdCatTests.xctest */,
+				036B95551B4C4B930071EC91 /* Adage.app */,
+				036B956C1B4C4B930071EC91 /* AdageTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		036B95571B4C4B930071EC91 /* ProdCat */ = {
+		036B95571B4C4B930071EC91 /* Adage */ = {
 			isa = PBXGroup;
 			children = (
 				036B955A1B4C4B930071EC91 /* AppDelegate.swift */,
@@ -90,7 +90,7 @@
 				036B95651B4C4B930071EC91 /* LaunchScreen.xib */,
 				036B95581B4C4B930071EC91 /* Supporting Files */,
 			);
-			path = ProdCat;
+			path = Adage;
 			sourceTree = "<group>";
 		};
 		036B95581B4C4B930071EC91 /* Supporting Files */ = {
@@ -101,13 +101,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		036B956F1B4C4B930071EC91 /* ProdCatTests */ = {
+		036B956F1B4C4B930071EC91 /* AdageTests */ = {
 			isa = PBXGroup;
 			children = (
-				036B95721B4C4B930071EC91 /* ProdCatTests.swift */,
+				036B95721B4C4B930071EC91 /* AdageTests.swift */,
 				036B95701B4C4B930071EC91 /* Supporting Files */,
 			);
-			path = ProdCatTests;
+			path = AdageTests;
 			sourceTree = "<group>";
 		};
 		036B95701B4C4B930071EC91 /* Supporting Files */ = {
@@ -121,9 +121,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		036B95541B4C4B930071EC91 /* ProdCat */ = {
+		036B95541B4C4B930071EC91 /* Adage */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 036B95761B4C4B940071EC91 /* Build configuration list for PBXNativeTarget "ProdCat" */;
+			buildConfigurationList = 036B95761B4C4B940071EC91 /* Build configuration list for PBXNativeTarget "Adage" */;
 			buildPhases = (
 				036B95511B4C4B930071EC91 /* Sources */,
 				036B95521B4C4B930071EC91 /* Frameworks */,
@@ -133,14 +133,14 @@
 			);
 			dependencies = (
 			);
-			name = ProdCat;
-			productName = ProdCat;
-			productReference = 036B95551B4C4B930071EC91 /* ProdCat.app */;
+			name = Adage;
+			productName = Adage;
+			productReference = 036B95551B4C4B930071EC91 /* Adage.app */;
 			productType = "com.apple.product-type.application";
 		};
-		036B956B1B4C4B930071EC91 /* ProdCatTests */ = {
+		036B956B1B4C4B930071EC91 /* AdageTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 036B95791B4C4B940071EC91 /* Build configuration list for PBXNativeTarget "ProdCatTests" */;
+			buildConfigurationList = 036B95791B4C4B940071EC91 /* Build configuration list for PBXNativeTarget "AdageTests" */;
 			buildPhases = (
 				036B95681B4C4B930071EC91 /* Sources */,
 				036B95691B4C4B930071EC91 /* Frameworks */,
@@ -151,9 +151,9 @@
 			dependencies = (
 				036B956E1B4C4B930071EC91 /* PBXTargetDependency */,
 			);
-			name = ProdCatTests;
-			productName = ProdCatTests;
-			productReference = 036B956C1B4C4B930071EC91 /* ProdCatTests.xctest */;
+			name = AdageTests;
+			productName = AdageTests;
+			productReference = 036B956C1B4C4B930071EC91 /* AdageTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -174,7 +174,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 036B95501B4C4B930071EC91 /* Build configuration list for PBXProject "ProdCat" */;
+			buildConfigurationList = 036B95501B4C4B930071EC91 /* Build configuration list for PBXProject "Adage" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -187,8 +187,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				036B95541B4C4B930071EC91 /* ProdCat */,
-				036B956B1B4C4B930071EC91 /* ProdCatTests */,
+				036B95541B4C4B930071EC91 /* Adage */,
+				036B956B1B4C4B930071EC91 /* AdageTests */,
 			);
 		};
 /* End PBXProject section */
@@ -229,7 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				036B95731B4C4B930071EC91 /* ProdCatTests.swift in Sources */,
+				036B95731B4C4B930071EC91 /* AdageTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,7 +238,7 @@
 /* Begin PBXTargetDependency section */
 		036B956E1B4C4B930071EC91 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 036B95541B4C4B930071EC91 /* ProdCat */;
+			target = 036B95541B4C4B930071EC91 /* Adage */;
 			targetProxy = 036B956D1B4C4B930071EC91 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -348,7 +348,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = ProdCat/Info.plist;
+				INFOPLIST_FILE = Adage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -359,7 +359,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = ProdCat/Info.plist;
+				INFOPLIST_FILE = Adage/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -378,10 +378,10 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = ProdCatTests/Info.plist;
+				INFOPLIST_FILE = AdageTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProdCat.app/ProdCat";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Adage.app/Adage";
 			};
 			name = Debug;
 		};
@@ -393,17 +393,17 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = ProdCatTests/Info.plist;
+				INFOPLIST_FILE = AdageTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ProdCat.app/ProdCat";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Adage.app/Adage";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		036B95501B4C4B930071EC91 /* Build configuration list for PBXProject "ProdCat" */ = {
+		036B95501B4C4B930071EC91 /* Build configuration list for PBXProject "Adage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				036B95741B4C4B930071EC91 /* Debug */,
@@ -412,7 +412,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		036B95761B4C4B940071EC91 /* Build configuration list for PBXNativeTarget "ProdCat" */ = {
+		036B95761B4C4B940071EC91 /* Build configuration list for PBXNativeTarget "Adage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				036B95771B4C4B940071EC91 /* Debug */,
@@ -421,7 +421,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		036B95791B4C4B940071EC91 /* Build configuration list for PBXNativeTarget "ProdCatTests" */ = {
+		036B95791B4C4B940071EC91 /* Build configuration list for PBXNativeTarget "AdageTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				036B957A1B4C4B940071EC91 /* Debug */,
