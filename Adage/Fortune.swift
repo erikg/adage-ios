@@ -39,9 +39,9 @@ public class Fortune {
         if( body != nil ) {
             return body;
         }
-        var urlstring = NSString(format: "http://elfga.com/adage/raw/%@/%d", db, id) as String;
+        let urlstring = NSString(format: "http://elfga.com/adage/raw/%@/%d", db, id) as String;
         if let data = NSData(contentsOfURL: NSURL(string: urlstring)!) {
-            var json = NSJSONSerialization.JSONObjectWithData(data,options:nil,error:nil) as! NSDictionary;
+            let json = (try! NSJSONSerialization.JSONObjectWithData(data,options:[])) as! NSDictionary;
             body = json["body"] as? String;
         }
 

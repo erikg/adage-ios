@@ -52,7 +52,7 @@ class MasterViewController: UITableViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
-            if let indexPath = self.tableView.indexPathForSelectedRow() {
+            if let indexPath = self.tableView.indexPathForSelectedRow {
                 let object = Fortunes[indexPath.row]
             (segue.destinationViewController as! DetailViewController).detailItem = object
             }
@@ -70,7 +70,7 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
 
         let object = Fortunes[indexPath.row]
         cell.textLabel!.text = object.title()
@@ -94,15 +94,15 @@ class MasterViewController: UITableViewController {
     // MARK: - App funcs
 
     func update() {
-        var urlstring = NSString(format: "http://elfga.com/adage/raw/") as String;
+        let urlstring = NSString(format: "http://elfga.com/adage/raw/") as String;
         if let data = NSData(contentsOfURL: NSURL(string: urlstring)!) {
-            if let json = NSJSONSerialization.JSONObjectWithData(data,options:nil,error:nil) as? NSArray {
+            if let json = (try? NSJSONSerialization.JSONObjectWithData(data,options:[])) as? NSArray {
                 Fortunes.removeAll();
                 self.tableView.reloadData();
                 for entry in json {
-                    var id = entry["id"] as? Int;
-                    var db = entry["db"] as? String;
-                    var shortbody = entry["body"] as? String;
+                    let id = entry["id"] as? Int;
+                    let db = entry["db"] as? String;
+                    let shortbody = entry["body"] as? String;
 
                     Fortunes.append(Fortune(db:db!,id:id!,shortbody:shortbody!));
                     let indexPath = NSIndexPath(forRow: 0, inSection: 0)
