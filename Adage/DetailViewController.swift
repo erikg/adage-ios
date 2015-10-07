@@ -50,6 +50,14 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
+
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleLeftSwipe:"))
+        leftSwipe.direction = .Left
+        view.addGestureRecognizer(leftSwipe)
+
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleRightSwipe:"))
+        rightSwipe.direction = .Right
+        view.addGestureRecognizer(rightSwipe)
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,6 +65,11 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func handleRightSwipe(recognizer:UISwipeGestureRecognizer) {
+    }
+
+    @IBAction func handleLeftSwipe(recognizer:UISwipeGestureRecognizer) {
+    }
 
 }
 
