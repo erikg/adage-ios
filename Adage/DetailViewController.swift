@@ -39,6 +39,7 @@ class DetailViewController: UIViewController {
     func configureView() {
         // Update the user interface for the detail item.
         if let detail: Fortune = self.detailItem {
+	    self.title = detail.title()
             if let label = self.detailDescriptionLabel {
                 label.text = detail.getBody()
             }
