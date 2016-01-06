@@ -27,22 +27,48 @@ public class Fortune {
     var id: Int;
     var shortbody: String;
     var body: String?;
+    var fetching: Bool;
 
     init(db:String, id:Int, shortbody:String) {
         self.db = db;
         self.id = id;
         self.shortbody = shortbody;
         self.body = nil;
+        self.fetching = false;
+    }
+
+    func parseJson(data: NSData) {
+        let json = (try! NSJSONSerialization.JSONObjectWithData(data,options:[])) as! NSDictionary;
+        body = json["body"] as? String;
+    }
+
+    func fetch(uri: String) {
+        if(body != nil || fetching) {
+            return;
+        }
+        fetching = true;
+        if let data = NSData(contentsOfURL: NSURL(string: uri)!) {
+            parseJson(data);
+            fetching = false;
+        } else {
+            NSLog("Unable to fetch\n");
+        }
+    }
+
+    func fetch() {
+        fetch(NSString(format: "http://elfga.com/adage/raw/%@/%d", db, id) as String);
     }
 
     func getBody() -> String? {
         if( body != nil ) {
             return body;
         }
-        let urlstring = NSString(format: "http://elfga.com/adage/raw/%@/%d", db, id) as String;
-        if let data = NSData(contentsOfURL: NSURL(string: urlstring)!) {
-            let json = (try! NSJSONSerialization.JSONObjectWithData(data,options:[])) as! NSDictionary;
-            body = json["body"] as? String;
+        if( fetching == false ) {
+            fetch(NSString(format: "http://elfga.com/adage/raw/%@/%d", db, id) as String);
+        }
+        /* spinlock until value is returned */
+        while(fetching == true) {
+            sleep(0);
         }
 
         return body;
