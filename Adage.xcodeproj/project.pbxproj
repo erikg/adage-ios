@@ -15,6 +15,7 @@
 		036B95671B4C4B930071EC91 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 036B95651B4C4B930071EC91 /* LaunchScreen.xib */; };
 		036B95731B4C4B930071EC91 /* AdageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036B95721B4C4B930071EC91 /* AdageTests.swift */; };
 		0391E4771B4D6037001D229F /* Fortune.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0391E4761B4D6037001D229F /* Fortune.swift */; };
+		03E619271BD7D6F500807D22 /* Fortunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E619261BD7D6F500807D22 /* Fortunes.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		036B95711B4C4B930071EC91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		036B95721B4C4B930071EC91 /* AdageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdageTests.swift; sourceTree = "<group>"; };
 		0391E4761B4D6037001D229F /* Fortune.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fortune.swift; sourceTree = "<group>"; };
+		03E619261BD7D6F500807D22 /* Fortunes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fortunes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			children = (
 				036B955A1B4C4B930071EC91 /* AppDelegate.swift */,
 				036B955C1B4C4B930071EC91 /* MasterViewController.swift */,
+				03E619261BD7D6F500807D22 /* Fortunes.swift */,
 				036B955E1B4C4B930071EC91 /* DetailViewController.swift */,
 				036B95601B4C4B930071EC91 /* Main.storyboard */,
 				0391E4761B4D6037001D229F /* Fortune.swift */,
@@ -169,6 +172,7 @@
 				TargetAttributes = {
 					036B95541B4C4B930071EC91 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = M5K466G2BW;
 					};
 					036B956B1B4C4B930071EC91 = {
 						CreatedOnToolsVersion = 6.4;
@@ -221,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				036B955F1B4C4B930071EC91 /* DetailViewController.swift in Sources */,
+				03E619271BD7D6F500807D22 /* Fortunes.swift in Sources */,
 				036B955D1B4C4B930071EC91 /* MasterViewController.swift in Sources */,
 				036B955B1B4C4B930071EC91 /* AppDelegate.swift in Sources */,
 				0391E4771B4D6037001D229F /* Fortune.swift in Sources */,
@@ -351,8 +356,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Adage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.elfga.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -363,8 +369,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Adage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.elfga.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
