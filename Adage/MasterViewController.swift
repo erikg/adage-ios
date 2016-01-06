@@ -23,10 +23,8 @@
 
 import UIKit
 
+
 class MasterViewController: UITableViewController {
-
-    var Fortunes = [Fortune]();
-
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,7 +51,7 @@ class MasterViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                let object = Fortunes[indexPath.row]
+                let object = Fortunes.sharedInstance.setCurrent(indexPath.row)
             (segue.destinationViewController as! DetailViewController).detailItem = object
             }
         }
@@ -66,13 +64,13 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Fortunes.count
+        return Fortunes.sharedInstance.count()
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
 
-        let object = Fortunes[indexPath.row]
+        let object = Fortunes.sharedInstance.at(indexPath.row)
         cell.textLabel!.text = object.title()
         return cell
     }
@@ -82,33 +80,41 @@ class MasterViewController: UITableViewController {
         return true
     }
 
+    /*
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            Fortunes.removeAtIndex(indexPath.row)
+//            Fortunes.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
     }
+*/
 
     // MARK: - App funcs
 
     func update() {
+        /*
         let urlstring = NSString(format: "http://elfga.com/adage/raw/") as String;
         if let data = NSData(contentsOfURL: NSURL(string: urlstring)!) {
             if let json = (try? NSJSONSerialization.JSONObjectWithData(data,options:[])) as? NSArray {
-                Fortunes.removeAll();
+ //               Fortunes.removeAll();
                 self.tableView.reloadData();
                 for entry in json {
                     let id = entry["id"] as? Int;
                     let db = entry["db"] as? String;
                     let shortbody = entry["body"] as? String;
 
-                    Fortunes.append(Fortune(db:db!,id:id!,shortbody:shortbody!));
+//                    Fortunes.append(Fortune(db:db!,id:id!,shortbody:shortbody!));
                     let indexPath = NSIndexPath(forRow: 0, inSection: 0)
                     self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                 }
             }
+        }
+*/
+        for _ in Fortunes.sharedInstance.all() {
+                let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+                self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }
         self.tableView.reloadData();
     }
