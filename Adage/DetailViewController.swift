@@ -66,9 +66,11 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction func handleRightSwipe(recognizer:UISwipeGestureRecognizer) {
+        detailItem = Fortunes.sharedInstance.previous();
     }
 
     @IBAction func handleLeftSwipe(recognizer:UISwipeGestureRecognizer) {
+        detailItem = Fortunes.sharedInstance.next();
     }
 
 }
