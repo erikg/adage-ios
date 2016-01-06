@@ -24,7 +24,7 @@ Here is the relevant server code, if you're interested
         (mapcar (lambda (x) (list db (get-element "id" x)
                                   (concatenate 'string (subseq (get-element "body" x) 0 (min (length (get-element "body" x)) 12)) "...")))
                 (subseq docs 0 (min (length docs) count)))))
-    
+
     (ucw::defentry-point "/raw/" (:application *adage-ucw-application* :with-call/cc 'nil) ()
       (elfga.wowrealmstatus::ajaxify)
       (cl-json:encode-json (mapcar (lambda (x) (list (cons "db" (car x)) (cons "id" (cadr x)) (cons "body" (caddr x)))) (20-random)) elfga::$stream))
