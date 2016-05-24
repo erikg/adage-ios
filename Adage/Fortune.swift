@@ -47,12 +47,16 @@ public class Fortune {
             return;
         }
         fetching = true;
-        if let data = NSData(contentsOfURL: NSURL(string: uri)!) {
-            parseJson(data);
-            fetching = false;
-        } else {
-            NSLog("Unable to fetch\n");
-        }
+        NSURLConnection.sendAsynchronousRequest(NSURLRequest(URL: NSURL(string: uri)!),
+            queue: NSOperationQueue(),
+            completionHandler: {(response:NSURLResponse?, responseData:NSData?, error: NSError?) -> Void in
+                self.fetching = false;
+                if error == nil {
+                    self.parseJson(responseData!);
+                } else {
+                    NSLog("Unable to fetch from \(uri): \(error!.domain)")
+                }
+            });
     }
 
     func fetch() {
