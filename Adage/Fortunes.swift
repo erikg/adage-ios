@@ -16,48 +16,47 @@ class Fortunes {
     let prefetch = 2;
 
     init() {
+        var new_fortunes = []
         if let data = NSData(contentsOfURL: NSURL(string: urlstring)!) {
             if let json = (try? NSJSONSerialization.JSONObjectWithData(data,options:[])) as? NSArray {
-                for entry in json {
-                    let id = entry["id"] as? Int;
-                    let db = entry["db"] as? String;
-                    let shortbody = entry["body"] as? String;
-
-                    fortune_list.append(Fortune(db:db!,id:id!,shortbody:shortbody!));
-                }
+                new_fortunes = self.parse_array(json)
             }
         }
+        self.fortune_list = new_fortunes as! [Fortune]
+    }
+
+    func parse_array(json: NSArray) -> [Fortune] {
+        var out = [Fortune]()
+        for entry in json {
+            let id = entry["id"] as? Int;
+            let db = entry["db"] as? String;
+            let shortbody = entry["body"] as? String;
+            
+            out.append(Fortune(db:db!,id:id!,shortbody:shortbody!));
+        }
+
+        return out
     }
 
     func fetch_previous() {
+        var new_fortunes: [Fortune]?
         if let data = NSData(contentsOfURL: NSURL(string: urlstring)!) {
             if let json = (try? NSJSONSerialization.JSONObjectWithData(data,options:[])) as? NSArray {
-                var tmpfortune_list = [Fortune]();
                 index += json.count;
-                for entry in json {
-                    let id = entry["id"] as? Int;
-                    let db = entry["db"] as? String;
-                    let shortbody = entry["body"] as? String;
-
-                    tmpfortune_list.append(Fortune(db:db!,id:id!,shortbody:shortbody!));
-                }
-                fortune_list = tmpfortune_list + fortune_list;
+                new_fortunes = parse_array(json);
             }
         }
+        fortune_list = new_fortunes! + fortune_list
     }
 
     func fetch_next() {
+        var new_fortunes: [Fortune]?
         if let data = NSData(contentsOfURL: NSURL(string: urlstring)!) {
             if let json = (try? NSJSONSerialization.JSONObjectWithData(data,options:[])) as? NSArray {
-                for entry in json {
-                    let id = entry["id"] as? Int;
-                    let db = entry["db"] as? String;
-                    let shortbody = entry["body"] as? String;
-
-                    fortune_list.append(Fortune(db:db!,id:id!,shortbody:shortbody!));
-                }
+                new_fortunes = parse_array(json)
             }
         }
+        fortune_list = fortune_list + new_fortunes!
     }
 
     func current() -> Fortune {
