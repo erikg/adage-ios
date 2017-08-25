@@ -23,63 +23,63 @@
 import Foundation
 
 open class Fortune {
-    var db: String;
-    var id: Int;
-    var shortbody: String;
-    var body: String?;
-    var fetching: Bool;
+    var db: String
+    var id: Int
+    var shortbody: String
+    var body: String?
+    var fetching: Bool
 
     init(db:String, id:Int, shortbody:String) {
-        self.db = db;
-        self.id = id;
-        self.shortbody = shortbody;
-        self.body = nil;
-        self.fetching = false;
+        self.db = db
+        self.id = id
+        self.shortbody = shortbody
+        self.body = nil
+        self.fetching = false
     }
 
     func parseJson(_ data: Data) {
-        let json = (try! JSONSerialization.jsonObject(with: data,options:[])) as! NSDictionary;
-        body = json["body"] as? String;
+        let json = (try! JSONSerialization.jsonObject(with: data,options:[])) as! NSDictionary
+        body = json["body"] as? String
     }
 
     func fetch(_ uri: String) {
         if(body != nil || fetching) {
-            return;
+            return
         }
-        fetching = true;
+        fetching = true
         NSURLConnection.sendAsynchronousRequest(URLRequest(url: URL(string: uri)!),
             queue: OperationQueue(),
             completionHandler: {(response:URLResponse?, responseData:Data?, error: Error?) -> Void in
-                self.fetching = false;
+                self.fetching = false
                 if error == nil {
-                    self.parseJson(responseData!);
+                    self.parseJson(responseData!)
                 } else {
                     NSLog("Unable to fetch from \(uri): \(String(describing: error))")
                 }
-            });
+            })
     }
 
     func fetch() {
-        fetch(NSString(format: "http://elfga.com/adage/raw/%@/%d", db, id) as String);
+        fetch(NSString(format: "http://elfga.com/adage/raw/%@/%d", db, id) as String)
     }
 
     func getBody() -> String? {
         if( body != nil ) {
-            return body;
+            return body
         }
         if( fetching == false ) {
-            fetch(NSString(format: "http://elfga.com/adage/raw/%@/%d", db, id) as String);
+            fetch(NSString(format: "http://elfga.com/adage/raw/%@/%d", db, id) as String)
         }
         /* spinlock until value is returned */
         while(fetching == true) {
-            sleep(0);
+            sleep(0)
         }
 
-        return body;
+        return body
     }
 
     func title() -> String {
-        return db + "/" + id.description + ": " + shortbody;
+        return db + "/" + id.description + ": " + shortbody
     }
 
 }

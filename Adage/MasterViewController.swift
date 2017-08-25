@@ -32,13 +32,13 @@ class MasterViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.refreshControl = UIRefreshControl();
+        self.refreshControl = UIRefreshControl()
         if(self.refreshControl != nil ) {
-            self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh");
-            self.refreshControl!.addTarget(self, action: #selector(MasterViewController.update(_:)), for: UIControlEvents.valueChanged);
-            self.tableView.addSubview(refreshControl!);
+            self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
+            self.refreshControl!.addTarget(self, action: #selector(MasterViewController.update(_:)), for: UIControlEvents.valueChanged)
+            self.tableView.addSubview(refreshControl!)
         }
-        update();
+        update()
     }
 
     override func didReceiveMemoryWarning() {
@@ -95,17 +95,17 @@ class MasterViewController: UITableViewController {
 
     func update() {
         /*
-        let urlstring = NSString(format: "http://elfga.com/adage/raw/") as String;
+        let urlstring = NSString(format: "http://elfga.com/adage/raw/") as String
         if let data = NSData(contentsOfURL: NSURL(string: urlstring)!) {
             if let json = (try? NSJSONSerialization.JSONObjectWithData(data,options:[])) as? NSArray {
- //               Fortunes.removeAll();
-                self.tableView.reloadData();
+ //               Fortunes.removeAll()
+                self.tableView.reloadData()
                 for entry in json {
-                    let id = entry["id"] as? Int;
-                    let db = entry["db"] as? String;
-                    let shortbody = entry["body"] as? String;
+                    let id = entry["id"] as? Int
+                    let db = entry["db"] as? String
+                    let shortbody = entry["body"] as? String
 
-//                    Fortunes.append(Fortune(db:db!,id:id!,shortbody:shortbody!));
+//                    Fortunes.append(Fortune(db:db!,id:id!,shortbody:shortbody!))
                     let indexPath = NSIndexPath(forRow: 0, inSection: 0)
                     self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                 }
@@ -116,12 +116,12 @@ class MasterViewController: UITableViewController {
                 let indexPath = IndexPath(row: 0, section: 0)
                 self.tableView.insertRows(at: [indexPath], with: .automatic)
         }
-        self.tableView.reloadData();
+        self.tableView.reloadData()
     }
 
     func update(_ sender: AnyObject) {
-        update();
-        self.refreshControl?.endRefreshing();
+        update()
+        self.refreshControl?.endRefreshing()
     }
 }
 
