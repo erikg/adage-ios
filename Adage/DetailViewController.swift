@@ -5,7 +5,7 @@
 // Created by Erik Greenwald on 7/8/15.
 //
 // Adage-iOS - iOS interface to the adage api at http://elfga.com/adage
-// Copyright (c) 2015-2016 ElfGA Software Solutions, LLC
+// Copyright (c) 2015-2017 ElfGA Software Solutions, LLC
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by

@@ -3,7 +3,7 @@
 //  Adage
 //
 //  Created by Erik Greenwald on 10/21/15.
-//  Copyright © 2015-2016 ElfGA. All rights reserved.
+//  Copyright © 2015-2017 ElfGA. All rights reserved.
 //
 
 import Foundation

@@ -3,7 +3,7 @@
 //  AdageTests
 //
 //  Created by Erik Greenwald on 7/7/15.
-//  Copyright (c) 2015-2016 ElfGA. All rights reserved.
+//  Copyright (c) 2015-2017 ElfGA. All rights reserved.
 //
 
 import UIKit
