@@ -26,16 +26,7 @@ class Fortunes {
     }
 
     func parse_array(_ json: [[String:AnyObject]]) -> [Fortune] {
-        var out = [Fortune]()
-        for entry in json {
-            let id = entry["id"] as? Int
-            let db = entry["db"] as? String
-            let shortbody = entry["body"] as? String
-
-            out.append(Fortune(db:db!,id:id!,shortbody:shortbody!))
-        }
-
-        return out
+        return json.map { Fortune(json:$0) }
     }
 
     func fetch_previous() {

@@ -37,6 +37,14 @@ open class Fortune {
         self.fetching = false
     }
 
+    init(json:[String:AnyObject]) {
+        self.db = json["db"] as? String ?? "BAD DB"
+        self.id = json["id"] as? Int ?? -1
+        self.shortbody = json["body"] as? String ?? "BAD BODY"
+        self.body = nil
+        self.fetching = false
+    }
+
     func parseJson(_ data: Data) {
         let json = (try! JSONSerialization.jsonObject(with: data,options:[])) as! NSDictionary
         body = json["body"] as? String
