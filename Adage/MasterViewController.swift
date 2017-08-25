@@ -35,7 +35,7 @@ class MasterViewController: UITableViewController {
         self.refreshControl = UIRefreshControl();
         if(self.refreshControl != nil ) {
             self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh");
-            self.refreshControl!.addTarget(self, action: "update:", forControlEvents: UIControlEvents.ValueChanged);
+            self.refreshControl!.addTarget(self, action: "update:", for: UIControlEvents.valueChanged);
             self.tableView.addSubview(refreshControl!);
         }
         update();
@@ -48,34 +48,34 @@ class MasterViewController: UITableViewController {
 
     // MARK: - Segues
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let object = Fortunes.sharedInstance.setCurrent(indexPath.row)
-            (segue.destinationViewController as! DetailViewController).detailItem = object
+            (segue.destination as! DetailViewController).detailItem = object
             }
         }
     }
 
     // MARK: - Table View
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Fortunes.sharedInstance.count()
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         let object = Fortunes.sharedInstance.at(indexPath.row)
         cell.textLabel!.text = object.title()
         return cell
     }
 
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
@@ -113,13 +113,13 @@ class MasterViewController: UITableViewController {
         }
 */
         for _ in Fortunes.sharedInstance.all() {
-                let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-                self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                let indexPath = IndexPath(row: 0, section: 0)
+                self.tableView.insertRows(at: [indexPath], with: .automatic)
         }
         self.tableView.reloadData();
     }
 
-    func update(sender: AnyObject) {
+    func update(_ sender: AnyObject) {
         update();
         self.refreshControl?.endRefreshing();
     }

@@ -52,11 +52,11 @@ class DetailViewController: UIViewController {
         self.configureView()
 
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleLeftSwipe:"))
-        leftSwipe.direction = .Left
+        leftSwipe.direction = .left
         view.addGestureRecognizer(leftSwipe)
 
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleRightSwipe:"))
-        rightSwipe.direction = .Right
+        rightSwipe.direction = .right
         view.addGestureRecognizer(rightSwipe)
     }
 
@@ -65,11 +65,11 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func handleRightSwipe(recognizer:UISwipeGestureRecognizer) {
+    @IBAction func handleRightSwipe(_ recognizer:UISwipeGestureRecognizer) {
         detailItem = Fortunes.sharedInstance.previous();
     }
 
-    @IBAction func handleLeftSwipe(recognizer:UISwipeGestureRecognizer) {
+    @IBAction func handleLeftSwipe(_ recognizer:UISwipeGestureRecognizer) {
         detailItem = Fortunes.sharedInstance.next();
     }
 

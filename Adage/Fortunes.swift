@@ -17,15 +17,15 @@ class Fortunes {
 
     init() {
         var new_fortunes = []
-        if let data = NSData(contentsOfURL: NSURL(string: urlstring)!) {
-            if let json = (try? NSJSONSerialization.JSONObjectWithData(data,options:[])) as? NSArray {
+        if let data = try? Data(contentsOf: URL(string: urlstring)!) {
+            if let json = (try? JSONSerialization.jsonObject(with: data,options:[])) as? NSArray {
                 new_fortunes = self.parse_array(json)
             }
         }
         self.fortune_list = new_fortunes as! [Fortune]
     }
 
-    func parse_array(json: NSArray) -> [Fortune] {
+    func parse_array(_ json: NSArray) -> [Fortune] {
         var out = [Fortune]()
         for entry in json {
             let id = entry["id"] as? Int;
@@ -40,8 +40,8 @@ class Fortunes {
 
     func fetch_previous() {
         var new_fortunes: [Fortune]?
-        if let data = NSData(contentsOfURL: NSURL(string: urlstring)!) {
-            if let json = (try? NSJSONSerialization.JSONObjectWithData(data,options:[])) as? NSArray {
+        if let data = try? Data(contentsOf: URL(string: urlstring)!) {
+            if let json = (try? JSONSerialization.jsonObject(with: data,options:[])) as? NSArray {
                 index += json.count;
                 new_fortunes = parse_array(json);
             }
@@ -51,8 +51,8 @@ class Fortunes {
 
     func fetch_next() {
         var new_fortunes: [Fortune]?
-        if let data = NSData(contentsOfURL: NSURL(string: urlstring)!) {
-            if let json = (try? NSJSONSerialization.JSONObjectWithData(data,options:[])) as? NSArray {
+        if let data = try? Data(contentsOf: URL(string: urlstring)!) {
+            if let json = (try? JSONSerialization.jsonObject(with: data,options:[])) as? NSArray {
                 new_fortunes = parse_array(json)
             }
         }
@@ -90,7 +90,8 @@ class Fortunes {
         return fortune_list.count;
     }
 
-    func at(var val: Int) -> Fortune {
+    func at(_ val: Int) -> Fortune {
+        var val = val
         if(val > fortune_list.count - prefetch) {
             fetch_next();
         }
@@ -105,7 +106,7 @@ class Fortunes {
         return fortune_list[val];
     }
 
-    func setCurrent(val: Int) -> Fortune {
+    func setCurrent(_ val: Int) -> Fortune {
         index = val;
         if(index > fortune_list.count - prefetch) {
             fetch_next();

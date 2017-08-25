@@ -22,7 +22,7 @@
 
 import Foundation
 
-public class Fortune {
+open class Fortune {
     var db: String;
     var id: Int;
     var shortbody: String;
@@ -37,19 +37,19 @@ public class Fortune {
         self.fetching = false;
     }
 
-    func parseJson(data: NSData) {
-        let json = (try! NSJSONSerialization.JSONObjectWithData(data,options:[])) as! NSDictionary;
+    func parseJson(_ data: Data) {
+        let json = (try! JSONSerialization.jsonObject(with: data,options:[])) as! NSDictionary;
         body = json["body"] as? String;
     }
 
-    func fetch(uri: String) {
+    func fetch(_ uri: String) {
         if(body != nil || fetching) {
             return;
         }
         fetching = true;
-        NSURLConnection.sendAsynchronousRequest(NSURLRequest(URL: NSURL(string: uri)!),
-            queue: NSOperationQueue(),
-            completionHandler: {(response:NSURLResponse?, responseData:NSData?, error: NSError?) -> Void in
+        NSURLConnection.sendAsynchronousRequest(URLRequest(url: URL(string: uri)!),
+            queue: OperationQueue(),
+            completionHandler: {(response:URLResponse?, responseData:Data?, error: NSError?) -> Void in
                 self.fetching = false;
                 if error == nil {
                     self.parseJson(responseData!);

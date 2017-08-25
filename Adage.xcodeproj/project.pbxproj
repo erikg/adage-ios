@@ -15,7 +15,7 @@
 		036B95671B4C4B930071EC91 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 036B95651B4C4B930071EC91 /* LaunchScreen.xib */; };
 		036B95731B4C4B930071EC91 /* AdageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036B95721B4C4B930071EC91 /* AdageTests.swift */; };
 		0391E4771B4D6037001D229F /* Fortune.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0391E4761B4D6037001D229F /* Fortune.swift */; };
-		03E619271BD7D6F500807D22 /* Fortunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E619261BD7D6F500807D22 /* Fortunes.swift */; settings = {ASSET_TAGS = (); }; };
+		03E619271BD7D6F500807D22 /* Fortunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E619261BD7D6F500807D22 /* Fortunes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,9 +173,11 @@
 					036B95541B4C4B930071EC91 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = M5K466G2BW;
+						LastSwiftMigration = 0830;
 					};
 					036B956B1B4C4B930071EC91 = {
 						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0830;
 						TestTargetID = 036B95541B4C4B930071EC91;
 					};
 				};
@@ -362,6 +364,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.elfga.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -375,6 +378,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.elfga.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -394,6 +398,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.elfga.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Adage.app/Adage";
 			};
 			name = Debug;
@@ -410,6 +415,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.elfga.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Adage.app/Adage";
 			};
 			name = Release;
