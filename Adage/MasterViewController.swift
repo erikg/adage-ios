@@ -35,7 +35,7 @@ class MasterViewController: UITableViewController {
         self.refreshControl = UIRefreshControl();
         if(self.refreshControl != nil ) {
             self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh");
-            self.refreshControl!.addTarget(self, action: "update:", for: UIControlEvents.valueChanged);
+            self.refreshControl!.addTarget(self, action: #selector(MasterViewController.update(_:)), for: UIControlEvents.valueChanged);
             self.tableView.addSubview(refreshControl!);
         }
         update();

@@ -16,16 +16,16 @@ class Fortunes {
     let prefetch = 2;
 
     init() {
-        var new_fortunes = []
+        var new_fortunes = [Fortune]()
         if let data = try? Data(contentsOf: URL(string: urlstring)!) {
-            if let json = (try? JSONSerialization.jsonObject(with: data,options:[])) as? NSArray {
+            if let json = (try? JSONSerialization.jsonObject(with: data,options:[])) as? [[String:AnyObject]] {
                 new_fortunes = self.parse_array(json)
             }
         }
-        self.fortune_list = new_fortunes as! [Fortune]
+        self.fortune_list = new_fortunes 
     }
 
-    func parse_array(_ json: NSArray) -> [Fortune] {
+    func parse_array(_ json: [[String:AnyObject]]) -> [Fortune] {
         var out = [Fortune]()
         for entry in json {
             let id = entry["id"] as? Int;
@@ -41,7 +41,7 @@ class Fortunes {
     func fetch_previous() {
         var new_fortunes: [Fortune]?
         if let data = try? Data(contentsOf: URL(string: urlstring)!) {
-            if let json = (try? JSONSerialization.jsonObject(with: data,options:[])) as? NSArray {
+            if let json = (try? JSONSerialization.jsonObject(with: data,options:[])) as? [[String:AnyObject]] {
                 index += json.count;
                 new_fortunes = parse_array(json);
             }
@@ -52,7 +52,7 @@ class Fortunes {
     func fetch_next() {
         var new_fortunes: [Fortune]?
         if let data = try? Data(contentsOf: URL(string: urlstring)!) {
-            if let json = (try? JSONSerialization.jsonObject(with: data,options:[])) as? NSArray {
+            if let json = (try? JSONSerialization.jsonObject(with: data,options:[])) as? [[String:AnyObject]] {
                 new_fortunes = parse_array(json)
             }
         }
@@ -69,11 +69,12 @@ class Fortunes {
         }
         fortune_list[index+1].fetch();
         fortune_list[index+2].fetch();
-        return fortune_list[++index];
+        index += 1
+        return fortune_list[index];
     }
 
     func previous() -> Fortune {
-        index--;
+        index -= 1
         if(index < prefetch) {
             fetch_previous();
         }

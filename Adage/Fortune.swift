@@ -49,12 +49,12 @@ open class Fortune {
         fetching = true;
         NSURLConnection.sendAsynchronousRequest(URLRequest(url: URL(string: uri)!),
             queue: OperationQueue(),
-            completionHandler: {(response:URLResponse?, responseData:Data?, error: NSError?) -> Void in
+            completionHandler: {(response:URLResponse?, responseData:Data?, error: Error?) -> Void in
                 self.fetching = false;
                 if error == nil {
                     self.parseJson(responseData!);
                 } else {
-                    NSLog("Unable to fetch from \(uri): \(error!.domain)")
+                    NSLog("Unable to fetch from \(uri): \(String(describing: error))")
                 }
             });
     }

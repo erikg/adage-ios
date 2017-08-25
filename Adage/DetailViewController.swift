@@ -51,11 +51,11 @@ class DetailViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
 
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleLeftSwipe:"))
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(DetailViewController.handleLeftSwipe(_:)))
         leftSwipe.direction = .left
         view.addGestureRecognizer(leftSwipe)
 
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleRightSwipe:"))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(DetailViewController.handleRightSwipe(_:)))
         rightSwipe.direction = .right
         view.addGestureRecognizer(rightSwipe)
     }
