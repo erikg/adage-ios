@@ -25,11 +25,6 @@ import UIKit
 
 
 class MasterViewController: UITableViewController {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.refreshControl = UIRefreshControl()
@@ -38,27 +33,25 @@ class MasterViewController: UITableViewController {
             self.refreshControl!.addTarget(self, action: #selector(MasterViewController.update(_:)), for: UIControlEvents.valueChanged)
             self.tableView.addSubview(refreshControl!)
         }
-        update()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        NotificationCenter.default.addObserver(forName: Notification.update, object: nil, queue: nil) {
+            notification in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
 
     // MARK: - Segues
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let object = Fortunes.sharedInstance.setCurrent(indexPath.row)
-            (segue.destination as! DetailViewController).detailItem = object
+                (segue.destination as! DetailViewController).detailItem = object
             }
         }
     }
 
     // MARK: - Table View
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -69,59 +62,18 @@ class MasterViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-
         let object = Fortunes.sharedInstance.at(indexPath.row)
-        cell.textLabel!.text = object.title()
+        cell.textLabel!.text = object.title
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-
-    /*
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-//            Fortunes.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-        }
-    }
-*/
-
     // MARK: - App funcs
-
-    func update() {
-        /*
-        let urlstring = NSString(format: "http://elfga.com/adage/raw/") as String
-        if let data = NSData(contentsOfURL: NSURL(string: urlstring)!) {
-            if let json = (try? NSJSONSerialization.JSONObjectWithData(data,options:[])) as? NSArray {
- //               Fortunes.removeAll()
+    func update(_ sender: AnyObject?) {
+        Fortunes.sharedInstance.update { _ in
+            DispatchQueue.main.async {
                 self.tableView.reloadData()
-                for entry in json {
-                    let id = entry["id"] as? Int
-                    let db = entry["db"] as? String
-                    let shortbody = entry["body"] as? String
-
-//                    Fortunes.append(Fortune(db:db!,id:id!,shortbody:shortbody!))
-                    let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-                    self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-                }
+                self.refreshControl?.endRefreshing()
             }
         }
-*/
-        for _ in Fortunes.sharedInstance.all() {
-                let indexPath = IndexPath(row: 0, section: 0)
-                self.tableView.insertRows(at: [indexPath], with: .automatic)
-        }
-        self.tableView.reloadData()
-    }
-
-    func update(_ sender: AnyObject) {
-        update()
-        self.refreshControl?.endRefreshing()
     }
 }
-

@@ -22,12 +22,22 @@
 
 import Foundation
 
-open class Fortune {
-    var db: String
-    var id: Int
-    var shortbody: String
-    var body: String?
-    var fetching: Bool
+typealias NetCompletion = (_ response:URLResponse?, _ responseData:Data?, _ error:Error?) -> Void
+
+public class Fortune {
+    private var db: String
+    private var id: Int
+    private var shortbody: String
+    private var body: String?
+    private var fetching: Bool
+
+    public var title:String {
+        get {
+            return db + "/" + id.description + ": " + shortbody
+        }
+    }
+
+    private var completionHandlers = [NetCompletion?]()
 
     init(db:String, id:Int, shortbody:String) {
         self.db = db
@@ -46,48 +56,40 @@ open class Fortune {
     }
 
     func parseJson(_ data: Data) {
-        let json = (try! JSONSerialization.jsonObject(with: data,options:[])) as! NSDictionary
+        let json = (try! JSONSerialization.jsonObject(with: data,options:[])) as! [String:AnyObject]
         body = json["body"] as? String
     }
 
-    func fetch(_ uri: String) {
-        if(body != nil || fetching) {
+    func fetch(_ uri: String, _ completionHandler:NetCompletion?) {
+        if body != nil {
+            completionHandler?(nil,nil,nil)
             return
         }
+        if let ch = completionHandler {
+            completionHandlers.append(ch)
+        }
+        if fetching { return }
         fetching = true
-        NSURLConnection.sendAsynchronousRequest(URLRequest(url: URL(string: uri)!),
-            queue: OperationQueue(),
-            completionHandler: {(response:URLResponse?, responseData:Data?, error: Error?) -> Void in
-                self.fetching = false
-                if error == nil {
-                    self.parseJson(responseData!)
-                } else {
-                    NSLog("Unable to fetch from \(uri): \(String(describing: error))")
-                }
-            })
+        NSURLConnection.sendAsynchronousRequest(URLRequest(url: URL(string: uri)!), queue: OperationQueue(), completionHandler: {
+            response, responseData, error in
+            if error == nil && responseData != nil { self.parseJson(responseData!) }
+            self.fetching = false   // might be worth locking this and the next couple bits with a mutex or something
+            self.completionHandlers.forEach {
+                $0?(response, responseData, error)
+            }
+            self.completionHandlers.removeAll()
+        })
     }
 
     func fetch() {
-        fetch(NSString(format: "http://elfga.com/adage/raw/%@/%d", db, id) as String)
+        fetch(nil)
     }
 
+    func fetch(_ completionHandler:NetCompletion?) {
+        fetch(String(format: "http://elfga.com/adage/raw/%@/%d", db, id), completionHandler)
+    }
+    
     func getBody() -> String? {
-        if( body != nil ) {
-            return body
-        }
-        if( fetching == false ) {
-            fetch(NSString(format: "http://elfga.com/adage/raw/%@/%d", db, id) as String)
-        }
-        /* spinlock until value is returned */
-        while(fetching == true) {
-            sleep(0)
-        }
-
         return body
     }
-
-    func title() -> String {
-        return db + "/" + id.description + ": " + shortbody
-    }
-
 }

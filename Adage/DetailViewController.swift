@@ -25,30 +25,23 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-
     @IBOutlet weak var detailDescriptionLabel: UITextView!
-
-
-    var detailItem: Fortune? {
-        didSet {
-            // Update the view.
-            self.configureView()
-        }
-    }
+    var detailItem: Fortune? {didSet {self.configureView()}}
 
     func configureView() {
-        // Update the user interface for the detail item.
-        if let detail: Fortune = self.detailItem {
-	    self.title = detail.title()
-            if let label = self.detailDescriptionLabel {
-                label.text = detail.getBody()
+        if let detail = self.detailItem {
+            detail.fetch() { _, _, _ in
+                DispatchQueue.main.async {
+                    self.detailDescriptionLabel?.text = detail.getBody()
+                }
             }
+            self.title = detail.title
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
         self.configureView()
 
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(DetailViewController.handleLeftSwipe(_:)))
@@ -60,11 +53,6 @@ class DetailViewController: UIViewController {
         view.addGestureRecognizer(rightSwipe)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     @IBAction func handleRightSwipe(_ recognizer:UISwipeGestureRecognizer) {
         detailItem = Fortunes.sharedInstance.previous()
     }
@@ -72,6 +60,4 @@ class DetailViewController: UIViewController {
     @IBAction func handleLeftSwipe(_ recognizer:UISwipeGestureRecognizer) {
         detailItem = Fortunes.sharedInstance.next()
     }
-
 }
-
